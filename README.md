@@ -1,4 +1,5 @@
 The display of the Banners 
+### App is currently fetching images from the nextagram APIs
 
 ## Dos of Billboard App
 
