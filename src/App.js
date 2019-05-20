@@ -3,21 +3,22 @@ import React, { Component } from "react";
 import "./App.scss";
 import Axios from "axios";
 
+import { Route } from "react-router-dom";
 import Loader from "./components/Loader";
-import MainDisplay from "./pages/MainDisplay"
+import SinglePage from "./pages/SinglePage";
 
-class App extends React.Component {
+class App extends Component{
   state = {
     loading: false,
-    banners: []
+    slots: []
   };
 
   componentDidMount() {
     this.setState({ loading: true });
-    Axios.get("our server API")
+    Axios.get("https://insta.nextacademy.com/api/v1/users")
       .then(result => {
         this.setState({
-          banners: result.data,
+          slots: result.data,
           loading: false
         });
       })
@@ -37,14 +38,13 @@ class App extends React.Component {
             exact
             path="/"
             component={props => (
-              <MainDisplay {...props} banners={this.state.banners} />
+              <SinglePage {...props} slots={this.state.slots} />
             )}
           />
         </div>
       );
     }
   }
-
 }
 
 export default App;

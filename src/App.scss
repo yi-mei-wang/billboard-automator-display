@@ -1,0 +1,91 @@
+$bg : #eee;
+$ff : 'arial';
+
+.centerLoader {
+  display: flexbox;
+  justify-content: center;
+}
+.papaDiv {
+  margin: 0px 100px;
+
+  header {
+    display: flex !important;
+    flex-direction: row;
+    background-color: $bg;
+
+    .profilePic {
+      border-radius: 50%;
+    }
+
+    .userInfo {
+      display: flex;
+      width: 100%;
+      height: 20%;
+      margin-top: 5px; 
+      
+      .icon {
+        width: 15px;
+      }
+    }
+  }
+}
+
+.userImages {
+  background-color: lightgrey
+}
+
+.App {
+  text-align: center;
+}
+
+.logo {
+  padding-right: 5px;
+  margin-right: 5px;
+  border-right: 1px solid black;
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+nav {
+  margin-bottom: 40px;
+}
+
+.containerBox {
+  display: flex;
+}
+
+.centerText {
+  text-align: center;
+  list-style-type: none;
+  color: black;
+}
+
+.linkStyle {
+  color: gray;
+}
+
+.imageBox {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+  object-fit: cover;
+}
+
+.imageUserBox {
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+
+.imageUser {
+  display: inline-block;
+  width: 200px;
+  margin: 10px;
+}
+
+.formLogin {
+  margin: 20px;
+}
