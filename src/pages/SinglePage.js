@@ -14,12 +14,11 @@ class SinglePage extends Component {
   }
   render() {
     return (
-      <div>
-        {this.props.slots.map((slot, index) => (
-          <div className="displayScreen" key={index}>
-            <SlotBanner id={slot.id} />
-          </div>
-        ))}
+      <div className="container">
+        <div className="displayScreen">
+          {/* {this.props.slots.map((slot, index) => ( */}
+          <SlotBanner />
+        </div>
       </div>
     );
   }
