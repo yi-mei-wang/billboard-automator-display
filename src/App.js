@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
 import "./App.scss";
-import Axios from "axios";
+import axios from "axios";
 
 import { Route } from "react-router-dom";
 import Loader from "./components/Loader";
 import SinglePage from "./pages/SinglePage";
 
-class App extends Component{
+class App extends Component {
   state = {
     loading: false,
     slots: []
@@ -15,8 +15,12 @@ class App extends Component{
 
   componentDidMount() {
     this.setState({ loading: true });
-    Axios.get("https://insta.nextacademy.com/api/v1/users")
+    // Getting the slots for?
+    let time = new Date().getTime();
+    axios
+      .get(`http://localhost:5000/api/v1/images?t=${time}`)
       .then(result => {
+        console.log(result);
         this.setState({
           slots: result.data,
           loading: false
