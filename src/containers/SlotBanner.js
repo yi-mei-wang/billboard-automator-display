@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
+import de from "../images/billboards.jpg";
+// import { finished } from "stream";
 
+let server = "5f6cf0ae.ngrok.io";
 class SlotBanner extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +16,17 @@ class SlotBanner extends Component {
     this.counter = 0;
   }
 
+  fillDefault = () => {
+    let banner = [];
+    let x = 0;
+    while (x < 12) {
+      banner.push(de);
+      x += 1;
+    }
+    console.log("banner =" + banner);
+
+    this.setState({ banners: banner });
+  };
   // Create a method that handles the banner shift
   // Each time it runs the counter increases by one i.e next
   changeBanner = () => {
@@ -23,18 +37,41 @@ class SlotBanner extends Component {
       : (this.counter = 0);
   };
 
+  componentWillMount() {
+    this.fillDefault();
+    console.log(this.state.banners);
+  }
+
+  bannerReplaceDefault(arr1, arr2) {
+    const finalbanner = [];
+    arr1.forEach(e1 =>
+      arr2.forEach(e2 => {
+        if (e1) {
+          finalbanner.push(e1);
+        } else {
+          finalbanner.push(e2);
+        }
+      })
+    );
+    return finalbanner;
+  }
+
   componentDidMount() {
+    this.loadData()
+    setInterval(this.loadData, 30000);
+  }
+
+  async loadData(){
     let time = new Date().getTime();
-
     axios
-      .get(`http://localhost:5000/api/v1/images?t=${time}`)
+      .get(`http://${server}/api/v1/images?t=${time}`)
       .then(result => {
-        console.log(result);
-        console.log(result.data.images);
-
         this.setState(
           {
-            banners: result.data.images,
+            banners: this.bannerReplaceDefault(
+              result.data.images,
+              this.state.banners
+            ),
             loading: false
           },
           () => {
@@ -46,24 +83,7 @@ class SlotBanner extends Component {
         console.log("ERROR: ", error);
       });
   }
-  // Axios.get(
-  //   `https://insta.nextacademy.com//api/v1/images`
-  //   // `https://insta.nextacademy.com//api/v1/images?userId=${this.props.id}`
-  //     .then(result => {
-  //       // I do a callback method when I send to result the JSON inside the Axios
-  //       this.setState(
-  //         {
-  //           banners: result.data
-  //         },
-  //         () => {
-  //           setInterval(this.changeBanner, 5000);
-  //         }
-  //       );
-  //     })
-  //     .catch(error => {
-  //       console.log("ERROR: ", error);
-  //     });
-  // }
+
 
   render() {
     return (
