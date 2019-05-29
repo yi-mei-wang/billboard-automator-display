@@ -68,6 +68,7 @@ class SlotBanner extends Component {
       .then(result => {
         this.setState(
           {
+            // banners: result.data.images,
             banners: this.bannerReplaceDefault(
               result.data.images,
               this.state.banners
