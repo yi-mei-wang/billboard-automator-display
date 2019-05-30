@@ -60,25 +60,25 @@ class SlotBanner extends Component {
     this.loadData()
     setInterval(this.loadData, 30000);
   }
-
+  
   async loadData(){
     let time = new Date().getTime();
     axios
-      .get(`http://${server}/api/v1/images?t=${time}`)
+      .get(`https://billboard-automated-server-1.herokuapp.com/api/v1/images?t=${time}`)
       .then(result => {
+        console.log('banners are '+this.state.banners);
         this.setState(
           {
+            
             // banners: result.data.images,
-            banners: this.bannerReplaceDefault(
-              result.data.images,
-              this.state.banners
-            ),
+            banners: this.bannerReplaceDefault(result.data.images, this.state.banners),
             loading: false
           },
           () => {
             setInterval(this.changeBanner, 5000);
           }
         );
+        console.log('banners after fetch '+this.state.banners);
       })
       .catch(error => {
         console.log("ERROR: ", error);
