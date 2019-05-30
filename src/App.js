@@ -18,7 +18,7 @@ class App extends Component {
     // Getting the slots for?
     let time = new Date().getTime();
     axios
-      .get(`http://localhost:5000/api/v1/images?t=${time}`)
+      .get(`https://billboard-automated-server-1.herokuapp.com/api/v1/images?t=${time}`)
       .then(result => {
         console.log(result);
         this.setState({

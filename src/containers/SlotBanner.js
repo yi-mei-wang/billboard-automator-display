@@ -14,6 +14,8 @@ class SlotBanner extends Component {
       currentBanner: null
     };
     this.counter = 0;
+    this.changeBannerTimer = null;
+    this.timer = 0;
   }
 
   fillDefault = () => {
@@ -42,49 +44,56 @@ class SlotBanner extends Component {
     console.log(this.state.banners);
   }
 
-  bannerReplaceDefault(arr1, arr2) {
-    const finalbanner = [];
-    arr1.forEach(e1 =>
-      arr2.forEach(e2 => {
-        if (e1) {
-          finalbanner.push(e1);
-        } else {
-          finalbanner.push(e2);
-        }
-      })
-    );
-    return finalbanner;
+  bannerReplaceDefault(default_banner_array, api_images) {
+    return [...api_images, ...default_banner_array.splice(api_images.length)];
+    // const finalbanner = [];
+    // default_banner_array.forEach(e1 =>
+    //   api_images.forEach(e2 => {
+    //     if (e2) {
+    //       finalbanner.push(e2);
+    //     } else {
+    //       finalbanner.push(e1);
+    //     }
+    //   })
+    // );
+    // return finalbanner;
   }
 
   componentDidMount() {
-    this.loadData()
-    setInterval(this.loadData, 30000);
+    this.loadData();
+    setInterval(this.loadData, 10000);
   }
-  
-  async loadData(){
+
+  loadData = () => {
+    console.log("Refetching");
+    clearInterval(this.changeBannerTimer);
     let time = new Date().getTime();
     axios
-      .get(`https://billboard-automated-server-1.herokuapp.com/api/v1/images?t=${time}`)
+      .get(
+        `https://billboard-automated-server-1.herokuapp.com/api/v1/images?t=${time}`
+      )
       .then(result => {
-        console.log('banners are '+this.state.banners);
         this.setState(
           {
-            
             // banners: result.data.images,
-            banners: this.bannerReplaceDefault(result.data.images, this.state.banners),
+            banners: this.bannerReplaceDefault(
+              this.state.banners,
+              result.data.images
+            ),
             loading: false
           },
           () => {
-            setInterval(this.changeBanner, 5000);
+            this.changeBannerTimer = setInterval(this.changeBanner, 2000);
+            this.timer += 1
+            console.log(this.timer);
+            
           }
         );
-        console.log('banners after fetch '+this.state.banners);
       })
       .catch(error => {
         console.log("ERROR: ", error);
       });
-  }
-
+  };
 
   render() {
     return (
