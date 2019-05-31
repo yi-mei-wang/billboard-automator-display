@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import de from "../images/billboards.jpg";
+import filler1 from "../images/filler1.jpg";
+import filler2 from "../images/filler2.jpg";
 // import { finished } from "stream";
 
 class SlotBanner extends Component {
@@ -21,8 +22,10 @@ class SlotBanner extends Component {
     let banner = [];
     let x = 0;
     while (x < 12) {
-      banner.push(de);
-      x += 1;
+      banner.push(filler1);
+      banner.push(filler2);
+
+      x += 2;
     }
     this.setState({ banners: banner });
   };
