@@ -11,7 +11,7 @@ class SlotBanner extends Component {
     // Outside state I declare a counter
     this.state = {
       banners: [],
-      currentBanner: de
+      currentBanner: filler2
     };
     this.counter = 0;
     this.changeBannerTimer = null;
