@@ -48,7 +48,7 @@ class SlotBanner extends Component {
 
   componentDidMount() {
     this.loadData();
-    setInterval(this.loadData, 26000);
+    setInterval(this.loadData, 60000);
   }
 
   loadData = () => {
@@ -71,7 +71,7 @@ class SlotBanner extends Component {
             loading: false
           },
           () => {
-            this.changeBannerTimer = setInterval(this.changeBanner, 2000);
+            this.changeBannerTimer = setInterval(this.changeBanner, 5000);
             this.timer += 1
             console.log(this.timer);
           }
