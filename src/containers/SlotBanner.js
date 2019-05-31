@@ -3,14 +3,13 @@ import axios from "axios";
 import de from "../images/billboards.jpg";
 // import { finished } from "stream";
 
-let server = "5f6cf0ae.ngrok.io";
 class SlotBanner extends Component {
   constructor(props) {
     super(props);
     // I declare banners and current banners inside state
     // Outside state I declare a counter
     this.state = {
-      banners: [], 
+      banners: [],
       currentBanner: de
     };
     this.counter = 0;
@@ -39,7 +38,7 @@ class SlotBanner extends Component {
 
   componentWillMount() {
     this.fillDefault();
-    console.log("will mount "+this.state.banners);
+    console.log("will mount " + this.state.banners);
   }
 
   bannerReplaceDefault(default_banner_array, api_images) {
@@ -60,19 +59,19 @@ class SlotBanner extends Component {
         `https://billboard-automated-server-1.herokuapp.com/api/v1/images?t=${time}`
       )
       .then(result => {
-        this.fillDefault()
+        this.fillDefault();
         this.setState(
           {
             // banners: result.data.images,
             banners: this.bannerReplaceDefault(
               this.state.banners,
-              result.data.images 
+              result.data.images
             ),
             loading: false
           },
           () => {
             this.changeBannerTimer = setInterval(this.changeBanner, 5000);
-            this.timer += 1
+            this.timer += 1;
             console.log(this.timer);
           }
         );
