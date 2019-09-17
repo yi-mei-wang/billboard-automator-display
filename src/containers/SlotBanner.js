@@ -32,7 +32,6 @@ class SlotBanner extends Component {
   // Create a method that handles the banner shift
   // Each time it runs the counter increases by one i.e next
   changeBanner = () => {
-    console.log(this.state);
     this.setState({ currentBanner: this.state.banners[this.counter] });
     this.counter < this.state.banners.length - 1
       ? this.counter++
@@ -41,7 +40,7 @@ class SlotBanner extends Component {
 
   componentWillMount() {
     this.fillDefault();
-    console.log("will mount " + this.state.banners);
+//     console.log("will mount " + this.state.banners);
   }
 
   bannerReplaceDefault(default_banner_array, api_images) {
@@ -54,7 +53,7 @@ class SlotBanner extends Component {
   }
 
   loadData = () => {
-    console.log("Refetching");
+//     console.log("Refetching");
     clearInterval(this.changeBannerTimer);
     let time = new Date().getTime();
     axios
@@ -75,7 +74,7 @@ class SlotBanner extends Component {
           () => {
             this.changeBannerTimer = setInterval(this.changeBanner, 5000);
             this.timer += 1;
-            console.log(this.timer);
+//             console.log(this.timer);
           }
         );
       })
